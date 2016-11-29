@@ -1,7 +1,15 @@
 <?php
-/**
- * User blog widget edit view
- */
+/*
+Theme Name: Instagram
+Theme URI: https://github.com/manacim/Instagram
+Author: Cim
+Author URI: https://demyx.com/
+Description: Instagram widget that displays up to 9 recent posts.
+Version: 2.0.0
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: instagram
+*/
 
 $widget = elgg_extract('entity', $vars);
 // set default value
