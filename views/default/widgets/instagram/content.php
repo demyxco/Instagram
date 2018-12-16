@@ -13,20 +13,26 @@ Text Domain: instagram
 
 $widget = elgg_extract('entity', $vars);
 $username = $widget->username;
-$number = $widget->num_display;
-$json = file_get_contents('https://www.instagram.com/'.$username.'/media/');
-$content = json_decode($json);
-$items = $content->items;
-$instagram_class = '';
+$endCursor = $widget->num_display;
 
-if (empty($username)) {
-	echo elgg_echo('instagram:empty');
+if (!$username) {
 	return;
 }
 
+if (!$endCursor) {
+	$endCursor = 9;
+}
+
+$cache = new Instagram\Storage\CacheManager(elgg_get_data_path());
+$api   = new Instagram\Api($cache);
+$api->setUserName($username);
+$feed = $api->getFeed();
+// print_r($feed);
+$medias = $feed->medias;
+
 echo '<ul class="instagram-list">';
-foreach ($items as $key => $value) {
-	if ($key == $number) break;
+foreach ($medias as $key => $value) {
+	if ($key == $endCursor) break;
 	switch ($number) {
 	    case 1:
 	        $instagram_class = 'ig-1';
@@ -42,12 +48,12 @@ foreach ($items as $key => $value) {
 	}
 	echo '<li class="'.$instagram_class.'">';
 		echo elgg_view('output/url', [
-		   'text' => '<img src="' . $value->images->standard_resolution->url . '">',
-		   'href' => 'javascript:',
+		   'text' => '<img src="' . $value->thumbnails[0]->src . '">',
+		   'href' => '#',
 		   'class' => 'elgg-lightbox',
 		   'data-colorbox-opts' => json_encode([
-		   		'width' => '500px',
-		   		'height' => '600px',
+		   		'width' => '600px',
+		   		'height' => '700px',
 		   		'href' => elgg_normalize_url('ajax/view/instagram/view' . '?id=' . $key . '&username=' . $username),
 		   		'className' => 'ig-colorbox'
 		   	])
