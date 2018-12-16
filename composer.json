@@ -1,6 +1,6 @@
 {
     "name": "demyx/instagram",
-    "description": "Instagram widget for Elgg",
+    "description": "Instagram plugin for the Elgg framework",
     "type": "elgg-plugin",
     "keywords": [
         "elgg",
