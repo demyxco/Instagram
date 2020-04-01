@@ -16,6 +16,7 @@ $username = $widget->username;
 $endCursor = $widget->num_display;
 
 if (!$username) {
+	echo elgg_echo('instagram:empty');
 	return;
 }
 
