@@ -1,8 +1,18 @@
 {
     "name": "demyx/instagram",
+    "description": "Instagram plugin for the Elgg framework",
     "type": "elgg-plugin",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "instagram"
+    ],
     "require": {
-        "composer/installers": ">=1.0.8"
+        "composer/installers": ">=1.0.8",
+        "pgrimaud/instagram-user-feed": "^5.1"
+    },        
+    "extra": {
+        "installer-name": "instagram"
     },
     "license": "GPL-2.0"
 }
